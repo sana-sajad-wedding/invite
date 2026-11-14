@@ -1,6 +1,6 @@
-@font-face{font-family:Nast;src:url('assets/fonts/IranNastaliq.ttf') format('truetype');font-display:block}
-@font-face{font-family:Sols;src:url('assets/fonts/wm_Sols.ttf') format('truetype');font-display:block}
-@font-face{font-family:Mirza;src:url('assets/fonts/wm_Mirza.ttf') format('truetype');font-display:block}
+@font-face{font-family:Nast;src:url('assets/fonts/IranNastaliq.woff2') format('woff2');font-display:block}
+@font-face{font-family:Sols;src:url('assets/fonts/wm_Sols.woff2') format('woff2');font-display:block}
+@font-face{font-family:Mirza;src:url('assets/fonts/wm_Mirza.woff2') format('woff2');font-display:block}
 
 @property --p{syntax:'<percentage>';inherits:false;initial-value:0%}
 :root{
@@ -12,7 +12,7 @@
 }
 *{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;overflow:hidden}
-body{background:#e4d3b8 url('assets/bg.jpg') center/cover;color:var(--ink);font-family:Mirza,serif;touch-action:manipulation;user-select:none;-webkit-user-select:none}
+body{background:#e4d3b8 url('assets/bg.webp') center/cover;color:var(--ink);font-family:Mirza,serif;touch-action:manipulation;user-select:none;-webkit-user-select:none}
 body.loading .stage{opacity:0}
 .stage{position:fixed;inset:0;display:grid;place-items:center;perspective:1400px;transition:opacity .6s}
 
@@ -22,14 +22,14 @@ body.loading .stage{opacity:0}
 .face,.shell,.liner,.pocket,.flap,.flap-out,.flap-in{position:absolute;inset:0;background:center/100% 100% no-repeat}
 .addr,.liner,.pocket,.flap-out,.flap-in,.seal,.half.top,.hf,.hb,.text,.rear,.crease{backface-visibility:hidden;-webkit-backface-visibility:hidden}
 
-.addr{transform:translateZ(1px);background-image:url('assets/env-front.jpg');box-shadow:0 1.2svh 3svh #4a372a55;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.addr{transform:translateZ(1px);background-image:url('assets/env-front.webp');box-shadow:0 1.2svh 3svh #4a372a55;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
 .addr-label{font-size:calc(var(--ew) * .05);color:var(--gold)}
 .addr-name{font-family:Nast,serif;font-size:calc(var(--ew) * .092);line-height:2.3;color:var(--rose);white-space:nowrap}
 .addr-name .ln{display:inline-block}
 .addr-rule{width:30%;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
 
 .seal-side{transform:rotateY(180deg)}
-.liner{background-image:url('assets/env-liner.jpg');box-shadow:0 1.2svh 3svh #4a372a55}
+.liner{background-image:url('assets/env-liner.webp');box-shadow:0 1.2svh 3svh #4a372a55}
 .pocket{transform:translateZ(12px);background-image:url('assets/env-pocket.webp');filter:drop-shadow(0 -1px 3px #4a372a40)}
 .flap{transform-origin:50% 0;transform:translateZ(16px) rotateX(0deg)}
 /* the pocket piece's opening is ~18% deeper than the flap art reaches: stretch the flap down 20% so it overlaps the side flaps like a real one */
@@ -46,12 +46,12 @@ body.loading .stage{opacity:0}
 .card{transition:transform 1.2s cubic-bezier(.6,0,.25,1)}
 .card.flipped{transform:rotateY(180deg)}
 .half{position:absolute;left:0;right:0;height:50%}
-.half.top,.hf{background:url('assets/card.jpg') top/100% 200%}
+.half.top,.hf{background:url('assets/card.webp') top/100% 200%}
 .half.top{top:0;box-shadow:0 .6svh 1.6svh #4a372a40}
 .half.bottom{top:50%;transform-origin:50% 0;transform:rotateX(179.6deg)}
 .hf,.hb{position:absolute;inset:0}
 .hf{background-position:bottom;box-shadow:0 1svh 2svh #4a372a40}
-.hb{transform:rotateX(180deg);background:url('assets/card-outside.jpg') center/100% 100%;box-shadow:0 0 0 1px #c9b08a44 inset}
+.hb{transform:rotateX(180deg);background:url('assets/card-outside.webp') center/100% 100%;box-shadow:0 0 0 1px #c9b08a44 inset}
 .shade{position:absolute;inset:0;background:linear-gradient(180deg,#3b2a1c99,#3b2a1c22);opacity:.9}
 .crease{position:absolute;left:0;right:0;top:50%;height:calc(var(--u) * 5);translate:0 -50%;opacity:0;transform:translateZ(.5px);
   background:linear-gradient(180deg,transparent,#ffffff55 42%,#5a432c2e 50%,#5a432c12 60%,transparent)}
@@ -71,7 +71,7 @@ body.loading .stage{opacity:0}
 .fam{font-family:Nast,serif;font-size:calc(var(--u) * 8);line-height:2.1;color:var(--rose);white-space:pre}
 
 /* back: same two voices as the front — Nastaliq rose for the headline lines, Mirza ink for the rest */
-.rear{transform:rotateY(180deg) translateZ(1px);background:url('assets/card.jpg') center/100% 100%;justify-content:center;padding:calc(var(--u) * 40) calc(var(--u) * 10) calc(var(--u) * 34);box-shadow:0 1svh 2.4svh #4a372a40}
+.rear{transform:rotateY(180deg) translateZ(1px);background:url('assets/card.webp') center/100% 100%;justify-content:center;padding:calc(var(--u) * 40) calc(var(--u) * 10) calc(var(--u) * 34);box-shadow:0 1svh 2.4svh #4a372a40}
 .r-date{font-family:Nast,serif;font-size:calc(var(--u) * 10.5);line-height:2;color:var(--rose)}
 .r-time{font-family:Sols,serif;font-size:calc(var(--u) * 5.6);line-height:2;word-spacing:.2em}
 .r-rule{width:26%;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:calc(var(--u) * 7) 0 calc(var(--u) * 5)}

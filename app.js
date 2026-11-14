@@ -186,7 +186,7 @@
   }
 
   // ---------- start ----------
-  const imgs = ['env-front.jpg', 'env-pocket.webp', 'env-flap-out.webp', 'env-flap-in.webp', 'env-liner.jpg', 'seal.webp', 'card.jpg', 'card-outside.jpg', 'butterfly-1.webp', 'butterfly-2.webp', 'butterfly-3.webp'].map(n => { const i = new Image(); i.src = 'assets/' + n; return new Promise(r => { i.onload = i.onerror = r; }); });
+  const imgs = ['env-front.webp', 'env-pocket.webp', 'env-flap-out.webp', 'env-flap-in.webp', 'env-liner.webp', 'seal.webp', 'card.webp', 'card-outside.webp', 'butterfly-1.webp', 'butterfly-2.webp', 'butterfly-3.webp'].map(n => { const i = new Image(); i.src = 'assets/' + n; return new Promise(r => { i.onload = i.onerror = r; }); });
   const ready = Promise.all([document.fonts.load('1em Nast', guest), document.fonts.load('1em Mirza', 'آ'), document.fonts.load('1em Sols', 'آ'), ...imgs]);
   Promise.race([ready, new Promise(r => setTimeout(r, 4000))]).catch(() => {}).then(async () => {
     measure();
