@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#eadcc4">
+<title>دعوت‌نامه</title>
+<link rel="preload" href="assets/fonts/IranNastaliq.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="style.css?v=17">
+</head>
+<body class="loading">
+
+<canvas class="fx far" id="fxFar" aria-hidden="true"></canvas>
+<main class="stage" id="stage">
+  <div class="env" id="env" role="button" tabindex="0" aria-label="باز کردن دعوت‌نامه">
+
+    <!-- address side: first thing the guest sees -->
+    <div class="face addr">
+      <p class="addr-label" id="addrLabel"></p>
+      <p class="addr-name ink" id="addrName"></p>
+      <i class="addr-rule"></i>
+    </div>
+
+    <!-- seal side -->
+    <div class="face seal-side">
+      <div class="shell" id="shell">
+        <div class="liner"></div>
+        <div class="pocket"></div>
+        <div class="flap" id="flap">
+          <div class="flap-out"></div>
+          <div class="flap-in"></div>
+        </div>
+        <img class="seal" id="seal" src="assets/seal.webp" alt="">
+      </div>
+
+      <div class="card-pos" id="cardPos"><div class="card-tilt" id="tilt"><div class="card" id="card">
+        <section class="front">
+          <div class="half top"></div>
+          <div class="half bottom" id="fold">
+            <div class="hf"><i class="shade" id="shade"></i></div>
+            <div class="hb" id="hb"></div>
+          </div>
+          <i class="crease" id="crease"></i>
+          <div class="text" id="text"></div>
+        </section>
+        <section class="rear" id="rear"></section>
+      </div></div></div>
+    </div>
+
+  </div>
+</main>
+
+<p class="hint" id="hint" aria-live="polite"></p>
+<canvas class="fx" id="fx" aria-hidden="true"></canvas>
+<canvas class="fx near" id="fxNear" aria-hidden="true"></canvas>
+<button class="chip" id="mute" aria-pressed="false" aria-label="صدا">♪</button>
+<button class="chip" id="replay" hidden>↻</button>
+<nav class="pill" id="mapBtn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.800 7-13a7 7 0 0 0-7-7zm0 9.500A2.500 2.500 0 1 1 12 6.500a2.500 2.500 0 0 1 0 5z"/></svg></nav>
+
+<script src="invite.config.js?v=17"></script>
+<script src="burst.js?v=17"></script>
+<script src="app.js?v=17"></script>
+</body>
+</html>

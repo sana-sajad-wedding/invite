@@ -1,0 +1,100 @@
+@font-face{font-family:Nast;src:url('assets/fonts/IranNastaliq.ttf') format('truetype');font-display:block}
+@font-face{font-family:Sols;src:url('assets/fonts/wm_Sols.ttf') format('truetype');font-display:block}
+@font-face{font-family:Mirza;src:url('assets/fonts/wm_Mirza.ttf') format('truetype');font-display:block}
+
+@property --p{syntax:'<percentage>';inherits:false;initial-value:0%}
+:root{
+  --ew:min(84vw,58svh);            /* envelope width (landscape 3:2) */
+  --cw:min(86vw,42svh);            /* open card width: leaves room above and below for buttons/hint */
+  --u:calc(var(--cw) / 100);       /* 1% of card width: all card type scales with it */
+  --ink:#4a372a; --rose:#8a4f47; --gold:#a8834f;
+  --ratio:941 / 1672;
+}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow:hidden}
+body{background:#e4d3b8 url('assets/bg.jpg') center/cover;color:var(--ink);font-family:Mirza,serif;touch-action:manipulation;user-select:none;-webkit-user-select:none}
+body.loading .stage{opacity:0}
+.stage{position:fixed;inset:0;display:grid;place-items:center;perspective:1400px;transition:opacity .6s}
+
+/* ---------- envelope: real artwork layers, all on the same 3:2 canvas ---------- */
+.env,.seal-side,.shell,.flap,.card-pos,.card-tilt,.card,.front,.half.bottom{transform-style:preserve-3d}
+.env{position:relative;width:var(--ew);aspect-ratio:3 / 2;cursor:pointer;outline:none;transform:translateY(0) translateZ(0) rotateY(0deg) rotateZ(-3deg)}
+.face,.shell,.liner,.pocket,.flap,.flap-out,.flap-in{position:absolute;inset:0;background:center/100% 100% no-repeat}
+.addr,.liner,.pocket,.flap-out,.flap-in,.seal,.half.top,.hf,.hb,.text,.rear,.crease{backface-visibility:hidden;-webkit-backface-visibility:hidden}
+
+.addr{transform:translateZ(1px);background-image:url('assets/env-front.jpg');box-shadow:0 1.2svh 3svh #4a372a55;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.addr-label{font-size:calc(var(--ew) * .05);color:var(--gold)}
+.addr-name{font-family:Nast,serif;font-size:calc(var(--ew) * .092);line-height:2.3;color:var(--rose);white-space:nowrap}
+.addr-name .ln{display:inline-block}
+.addr-rule{width:30%;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+
+.seal-side{transform:rotateY(180deg)}
+.liner{background-image:url('assets/env-liner.jpg');box-shadow:0 1.2svh 3svh #4a372a55}
+.pocket{transform:translateZ(12px);background-image:url('assets/env-pocket.webp');filter:drop-shadow(0 -1px 3px #4a372a40)}
+.flap{transform-origin:50% 0;transform:translateZ(16px) rotateX(0deg)}
+/* the pocket piece's opening is ~18% deeper than the flap art reaches: stretch the flap down 20% so it overlaps the side flaps like a real one */
+.flap-out,.flap-in{background-size:100% 120%;background-position:top}
+.flap-out{background-image:url('assets/env-flap-out.webp');filter:drop-shadow(0 2px 3px #4a372a4d)}
+/* inside of the flap: turned around its vertical axis so it stays exactly on the flap */
+.flap-in{transform:rotateY(180deg);background-image:url('assets/env-flap-in.webp')}
+.seal{position:absolute;left:50%;top:70.5%;width:17%;translate:-50% -50%;transform:translateZ(20px);filter:drop-shadow(0 3px 4px #4a372a55)}
+
+/* ---------- card ---------- */
+.card-pos{position:absolute;left:50%;top:50%;width:var(--cw);aspect-ratio:var(--ratio);translate:-50% -50%;transform:translateZ(3px)}
+.card-tilt,.card,.front,.rear,.text{position:absolute;inset:0}
+.card-tilt{transition:transform .25s ease-out}
+.card{transition:transform 1.2s cubic-bezier(.6,0,.25,1)}
+.card.flipped{transform:rotateY(180deg)}
+.half{position:absolute;left:0;right:0;height:50%}
+.half.top,.hf{background:url('assets/card.jpg') top/100% 200%}
+.half.top{top:0;box-shadow:0 .6svh 1.6svh #4a372a40}
+.half.bottom{top:50%;transform-origin:50% 0;transform:rotateX(179.6deg)}
+.hf,.hb{position:absolute;inset:0}
+.hf{background-position:bottom;box-shadow:0 1svh 2svh #4a372a40}
+.hb{transform:rotateX(180deg);background:url('assets/card-outside.jpg') center/100% 100%;box-shadow:0 0 0 1px #c9b08a44 inset}
+.shade{position:absolute;inset:0;background:linear-gradient(180deg,#3b2a1c99,#3b2a1c22);opacity:.9}
+.crease{position:absolute;left:0;right:0;top:50%;height:calc(var(--u) * 5);translate:0 -50%;opacity:0;transform:translateZ(.5px);
+  background:linear-gradient(180deg,transparent,#ffffff55 42%,#5a432c2e 50%,#5a432c12 60%,transparent)}
+
+.text,.rear{display:flex;flex-direction:column;align-items:center;text-align:center}
+/* three blocks spread between the arch and the bottom flowers */
+.text{transform:translateZ(1px);justify-content:space-between;padding:calc(var(--u) * 24) calc(var(--u) * 9) calc(var(--u) * 20)}
+/* each line is revealed right-to-left through a soft-edged mask; padding keeps long Nastaliq strokes inside the mask box */
+.ln{display:block;white-space:nowrap;padding:.7em 1.6em;margin:-.7em -1.6em;--p:0%;
+  -webkit-mask-image:linear-gradient(to left,#000 calc(var(--p) - 30%),transparent var(--p));mask-image:linear-gradient(to left,#000 calc(var(--p) - 30%),transparent var(--p))}
+.ln.on{-webkit-mask-image:none;mask-image:none}
+.bism{font-family:Nast,serif;font-size:calc(var(--u) * 8.4);line-height:2;color:var(--rose)}
+/* the two paragraphs are centred on the fold, so the crease falls in the gap between them */
+.paras{position:absolute;left:0;right:0;top:50%;translate:0 calc(-50% - var(--u) * 3)}
+.para{font-size:calc(var(--u) * 3.75);line-height:2.3}
+.para + .para{margin-top:calc(var(--u) * 7)}
+.fam{font-family:Nast,serif;font-size:calc(var(--u) * 8);line-height:2.1;color:var(--rose);white-space:pre}
+
+/* back: same two voices as the front — Nastaliq rose for the headline lines, Mirza ink for the rest */
+.rear{transform:rotateY(180deg) translateZ(1px);background:url('assets/card.jpg') center/100% 100%;justify-content:center;padding:calc(var(--u) * 40) calc(var(--u) * 10) calc(var(--u) * 34);box-shadow:0 1svh 2.4svh #4a372a40}
+.r-date{font-family:Nast,serif;font-size:calc(var(--u) * 10.5);line-height:2;color:var(--rose)}
+.r-time{font-family:Sols,serif;font-size:calc(var(--u) * 5.6);line-height:2;word-spacing:.2em}
+.r-rule{width:26%;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:calc(var(--u) * 7) 0 calc(var(--u) * 5)}
+.r-venue{font-family:Nast,serif;font-size:calc(var(--u) * 9);line-height:2;color:var(--rose)}
+.r-addr{font-family:Sols,serif;font-size:calc(var(--u) * 4.6);line-height:2}
+
+/* ---------- chrome ---------- */
+/* three depth layers: far sits behind the card (earlier in the page, no z-index), near is out of focus */
+.fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none}
+#fx,.fx.near{z-index:5}
+.fx.far{filter:blur(1.2px)}
+.fx.near{filter:blur(3px)}
+.hint,.pill{position:fixed;left:50%;translate:-50% 0;bottom:max(2.6svh,env(safe-area-inset-bottom));z-index:6;white-space:nowrap;font-size:clamp(15px,2.3svh,21px);transition:opacity .5s}
+.hint{color:#5d452f;text-shadow:0 1px 8px #fff7e6;opacity:0;pointer-events:none;animation:breathe 2.4s ease-in-out infinite}
+.hint.on{opacity:1}
+@keyframes breathe{50%{transform:translateY(-4px)}}
+.pill{display:flex;align-items:center;gap:.6em;font-family:Sols,serif;font-size:clamp(14px,2svh,18px);line-height:1.5;color:var(--rose);text-shadow:0 1px 6px #fff7e6;opacity:0;pointer-events:none}
+.pill.on{opacity:1;pointer-events:auto}
+.pill svg{width:1.1em;height:1.1em;fill:currentColor;flex:none;margin-inline-end:-.3em}
+.pill a{color:inherit;text-decoration:none;text-shadow:none;padding:.15em 1.1em;border-radius:99px;border:1px solid #a8834f88;background:#fff8ebee;box-shadow:0 2px 8px #4a372a22}
+.pill a:active{background:#f1dfc4}
+.chip{position:fixed;top:max(12px,env(safe-area-inset-top));z-index:7;width:44px;height:44px;display:grid;place-items:center;padding:0;border-radius:50%;border:1px solid #a8834f66;background:#fff6e6cc;color:#6a4d33;font:20px/1 system-ui,sans-serif;cursor:pointer}
+#mute{left:12px}#mute[aria-pressed=true]{opacity:.45;text-decoration:line-through}
+#replay{right:12px}
+:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+[hidden]{display:none!important}
