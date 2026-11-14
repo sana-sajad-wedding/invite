@@ -1,7 +1,7 @@
 (() => {
   const C = window.INVITE, $ = id => document.getElementById(id);
   const q = new URLSearchParams(location.search);
-  const guest = (q.get('to') || '').trim().slice(0, 60) || C.envelope.defaultGuest;
+  const guest = (q.get('to') || '').replace(/_/g, ' ').trim().slice(0, 60) || C.envelope.defaultGuest;
   const group = C.groups[q.get('g')] || C.groups[C.defaultGroup];
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
