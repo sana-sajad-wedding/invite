@@ -140,12 +140,10 @@
       { transform: 'rotateX(0deg)' }], 1300, INOUT);
     $('hb').hidden = true;
     to($('crease'), { opacity: 1 }, 400);
-    // ink in, line by line
-    for (const ln of text.querySelectorAll('.ln')) {
-      const head = ln.parentNode.className !== 'para';
-      ink(ln, head ? 2600 : 2400);
-      await wait(head ? 2300 : 1700);
-    }
+    // the whole text fades in together
+    text.style.opacity = 0;
+    for (const ln of text.querySelectorAll('.ln')) ln.classList.add('on');
+    await to(text, { opacity: 1 }, 1600, 'ease-in-out');
     await wait(500);
     state = 'open'; say(C.ui.hintFlip);
     $('replay').hidden = false;
