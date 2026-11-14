@@ -98,3 +98,6 @@ body.loading .stage{opacity:0}
 #replay{right:12px}
 :focus-visible{outline:2px solid var(--gold);outline-offset:4px}
 [hidden]{display:none!important}
+/* while fonts and artwork load: a small turning ring, so nothing shows half-dressed */
+body.loading::after{content:'';position:fixed;left:50%;top:50%;width:34px;height:34px;margin:-17px;border-radius:50%;border:2px solid #a8834f44;border-top-color:#a8834f;animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
